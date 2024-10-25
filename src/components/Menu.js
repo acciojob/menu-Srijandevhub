@@ -77,7 +77,6 @@ const defaultData = [
 const Menu = () => {
     const [menuList, setMenuList] = useState(defaultData);
     const [filteredList, setFilteredList] = useState(defaultData);
-    const [categories, setCategories] = useState([]);
     const handleFilterCategory = (category) => {
         if (category === "all") {
             setFilteredList(defaultData);
@@ -85,19 +84,30 @@ const Menu = () => {
             setFilteredList(menuList.filter(item => item.category === category));
         }
     }
-    useEffect(() => {
-        const uniqueCategories = ['all', ...new Set(defaultData.map((item) => item.category))];
-        setCategories(uniqueCategories);
-    }, [defaultData]);
     return (
         <div className="container">
             <h1>Our Menu</h1>
             <ul className="category_list">
-                {
-                    categories.map((category, index) => {
-                        return (<li key={index}><button className="category-btn" onClick={() => handleFilterCategory(category)}>{category}</button></li>);
-                    })
-                }
+                <li>
+                    <button className="category-btn" onClick={() => handleFilterCategory("all")}>
+                        All
+                    </button>
+                </li>
+                <li>
+                    <button id="filter-btn-1" className="category-btn" onClick={() => handleFilterCategory("breakfast")}>
+                        Breakfast
+                    </button>
+                </li>
+                <li>
+                    <button id="filter-btn-2" className="category-btn" onClick={() => handleFilterCategory("lunch")}>
+                        Lunch
+                    </button>
+                </li>
+                <li>
+                    <button id="filter-btn-3" className="category-btn" onClick={() => handleFilterCategory("shakes")}>
+                        Shakes
+                    </button>
+                </li>
             </ul>
             <div className="row">
                 {
